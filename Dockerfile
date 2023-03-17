@@ -20,6 +20,6 @@ RUN swig -python -c++ -I. one.i
 RUN g++ -shared -fPIC -I/usr/include/python3.9 -I. one_wrap.cxx one.o -o _one.so $(python3-config --cflags --ldflags)
 
 RUN python3 setup.py sdist bdist_wheel && \
-    pip install /app/dist/*
+    pip install $(find /app/dist -name "*.whl")
 
 CMD [ "python3", "/app/main.py"]
